@@ -1,0 +1,21 @@
+{% extends 'main.html' %}
+
+{% block content %}
+  <!-- Main Section -->
+  <main class="messagePage my-xl">
+    <div class="content-box">
+      <div class="message">
+        <a class="backButton" href="{% url 'inbox' %}"><i class="im im-angle-left"></i></a>
+        <h2 class="message__subject">{{message.subject}}</h4>
+          {% if message.sender %}
+          <a href="{% url 'user-profile' message.sender.id %}" class="message__author">{{message.name}}</a>
+          {% else %}
+          <a class="message__author">{{message.name}}</a>         {% comment %} Na ovaj se nacin rjesava problem koji nastaje prilikom otvaranja poruka {% endcomment %}
+          {% endif %}                                             {% comment %} Ukoliko imamo postojeci profil i ukoliko nemamo uopste profil {% endcomment %}
+          <p class="message__date">{{message.created}}</p>
+          <div class="message__body">{{message.body|linebreaks}}</div>
+      </div>
+    </div>
+  </main>
+
+  {% endblock content %}
